@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- includes for autocomplete -->
+	<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-4-autocomplete/dist/bootstrap-4-autocomplete.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	
+	<!-- Bootstrap 5 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <title>מגזין פריק - קטלוג של כל הגליונות</title>
+	<style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .image-container:hover img {
+            opacity: 0.7;
+        }
+        .image-container .overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1rem;
+			font-weight: bold;
+			dir: rtl;
+			text-align: center;
+			white-space: normal;
+			padding: 5px;
+		}
+
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+		
+		.dropdown-menu {
+		  position: absolute;
+		  right: 0% !important;
+		  text-align: right !important;
+		}
+		
+		input[type="search"]::-webkit-search-cancel-button {
+			display: none;
+		}
+		
+		
+    </style>
+</head>
+<body>
+	<div class="container py-5">
+        <div class="mb-4">
+            <img src="images/h.png" class="img-fluid mx-auto d-block" alt="Header Image">
+        </div>
+        <div class="mb-4 position: relative; display: inline-block;">
+            <div id="clearButton" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); cursor: pointer;">X</div>
+			<input id="myAutocomplete" type="search" class="form-control" placeholder="חיפוש משחקים, כתבות, ביקורות">
+			
+        </div>
+		
+    <div class="container py-5">
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="image-container p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1SZ0UywDufGC-s3LK7n32lI06LK73-mMa/view" target="_blank">
+						<img src="images/1.jpg" class="img-thumbnail">
+						<div class="overlay p-1">אמיגה |  סגה מסטר | CES | אינדיאנה ג'ונס | זרעי אופל | אלילות בגדי העור 2 | סטריט פייטרס 2 | צבי הנינג'ה אבודים בזמן | לוחמי הנינג'ה | הקומנדו הביוני | חיילים מעולם אחר | השד מטזמניה | כוחות הרעם | איי קרמבה
+								<BR>
+								<BR>
+								Indiana Jones and the Fate of Atalantis  | Dark Seed  | Lesther Godesses of Phobos 2  | Street Fighter 2  | Teenage Mutant Hero Turtles 4: Turtles in Time  | Bionic Commando | Universal Soldier  | Taz-Mania | Thunder Force  | Krustis Super Fun House
+						</div>
+						<figcaption class="figure-caption text-center">גליון 1</figcaption>
+					</a>
+				</figure>
+            </div>
+            <div class="image-container p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1eMhgYMF79y-QtO26R4Ni8CGMjJKOxYF_/view" target="_blank">
+						<img src="images/2.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+								מגה סידי | קינג קווסט 6 | צריח האופל | גמל שלמה | קירנדיה | חליפה אטומית | גרינדוג | סוניק 2 | הטורף 2 | הנוסע השמיני 3 | סוניק בלסטמן |  הנסיך הפרסי |  פליקס החתול | 
+								<BR> <BR>
+								MEGA CD | King Quest 6 | The Summoning | Mantis | Lance Stone | Kyrandia  | Atomic Runner | Greendog | Sonic 2 | Predator 2 | Alien 3 | Sonic Blastman | Prince of Persia | Harley's Humongous Adventure | Spindizzy Worlds | Felix The Cat | Sagaia | Monaco GP 2 Super
+						</div>
+						<figcaption class="figure-caption text-center">גליון 2</figcaption>
+					</a>
+				</figure>
+            </div>
+            <div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1tOGqPCRijfqI_tP3lPr5jB0l7lGqq_VQ/view" target="_blank">
+						<img src="images/3.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+								זעם האלים | פוליס קווסט 3 | רקס נבוליאר | חלל פראי | אפיק | שרלוק הולמס | ויין | סוניק 2 | אקו הדולפין |  מלחמת הכוכבים |  פאטל פיורי | בראס בוס |  אומנות הלחימה | מיקי מאוס 2 | באטמן חוזר |
+								<BR><BR>
+								Game Genie | Gods | Police Quest 3 | Rex Nebular | Spelljammer | Epic | Aces of Pacific | Sherlock Holmes | Ween | Sonic 2 | LHX | Echo | Road Runner's | Star Wars | Brass Boss | Fatal Fury (SNES)| Fist of the North Star | World Heroes | Art of Fighting | Mickey Mouse 2 | Batman Returns
+						</div>
+						<figcaption class="figure-caption text-center">גליון 3</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1mkIqHZlltpi-CFL_96EvtpkpRNkZfPJy/view" target="_blank">
+						<img src="images/4.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+								לבד באפילה | שכחו אותי בבית 2 | חולית 2 | הטרולים | הגובלינים 2 | אינקה | שליחות קטלנית 2 | וינג קומנדר | טייני טון | צ'סטר הצ'יטה | סופר מאריו 2 | סטריטס אוף רייג' | 
+								<BR><BR>
+								Humans | Alone in the Dark | Home Alone 2 | Dune 2 | Trolls | Gobliins 2 | Stunt Island | Inca | Super Chase HQ | Terminator 2 | Wing Commander | Tiny Toon | Chester Cheetah | Super Swiv | Amazing Tennis | Links 386 Pro | NBA All Star | World Trophy | Streets of Rage | Super Mario Land 2 | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 4</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1u_tHkkGamPBnwQeuRRICA9xIIg7D_FIC/view" target="_blank">
+						<img src="images/5.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						ציפורי פלדה | קומנץ' | רצח במיאמי | קפטיין אמריקה | צבי הנינג'ה הייפר סטון הייסט | רחובות הזעם 2 | פלאשבק | פוקי ורוקי | חליפת המחץ | מגה מן 5 | ספידבול 2 | 
+						<BR><BR>
+						Birds of Prey | Ultima Underworld | Star Control 2 | Incredible Machine | F15-III | Comanche | Amazone | Captain America | Teenage Mutant Ninja Turtles: The Hyperstone Heist | Road Rush 2 | Streets of Rage 2 | Flashback | Pocky & Rocky | Cybernator | Mega Man V | Dig Dug | Speedball 2 | Alien Syndrome |
+						</div>
+						<figcaption class="figure-caption text-center">גליון 5</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/0B7AcfXJGUxB7Vk4xc3VFb1FxeWc/view" target="_blank">
+						<img src="images/6.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						תערוכה | האי של ד"ר מוח | השבלולונים | הזחלולים | אקס-מן | רולו להצלה | לוחמי היערות | מלך הכביש | קרפדי הקרב | באטמן חוזר | קירבי | צ'אק רוק | רובוקופ 3 |
+						<BR><BR>
+						CES | 3DO | The Island of Dr. Brain | Legends of Valour | Jordan in Fight | Car and Driver | Creepers | Veil of Darkness | BAT II | X-Man | Rolo To Rescue | Lotus Esprit | Risky Woods | the King of Rally | Super Strike Eagle | Battle Maniacs | Batman Returns | Kirby | Chuck Rock | Robocop 3 | Space Gun | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 6</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/19cVOBxzsVTSW8uQhBJ97gwQLHme5VZgq/view" target="_blank">
+						<img src="images/7.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						טורבו דרגון | מלחמת הכוכבים אקס וינג | סינמאניה | יערות הגשם | שחמט 4000 | ספייס קווסט 5 | הסהרורי | מהלך אכזר | מיקרו מאצ'ינס | מאזינגר Z | ווילי ביימיש | מפלצות | נשק קטלני |  רובין הוד | שינובי 2 | באבסי | איי הקסם | 
+						<BR><BR>
+						Wax Works | Star Wars: X-Wing | Cinemania | Rainforest | Battle Chess 4000 | Space Quest V | Sleepwalker | Chaos Enging | G-LOC | Deadly Moves | Micro Machines | Mazine Saga | Willy Beamish | Cool World | Monsters | Lethal Weapon | Bubsy | Robin Hood | The Simpsons: Bartman Meets Radioactive Man | Shinoby II | Rainbow Islands | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 7</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1P-nc3GWe5TaUH2UoZ0H-Sx0vpiYxdjSz/view" target="_blank">
+						<img src="images/8.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						סופר סקופ | מארטי | פלאשבק | דחוף אותם | שבטי הנמלולים |  | האורח השביעי | אריק | אליפות הגולף של ניק פלדו | צ'אקאן | קריס קרוס | משימה בג'ונגל | סטאר פוקס | הויקינגים האבודים | טאז מאניה | אקוינוקס | בובות מתנגשות | בת-הים הקטנה |  משפחת אדאמס 2 | ג'יימס בונד | 
+						<BR><BR>
+						Super Scope | FM Towns HOME | Flashback | Push Over | Lemmings 2: The Tribes | The 7th Guest | Eric The Unready | Nick Foldo's Golf | Chakan | Kris Kross | Land Stalker | Jungle Strike | Star Fox | The Lost Vikings | Taz Mania | Shadowrun | Equinox | Crash Dummies | Little Mermade | Adams Family 2 | James Bond 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 8</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1jZRywNSNK5jScrznZ_xoreAR5aZ6pTZr/view" target="_blank">
+						<img src="images/9.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						ההיסטוריה של מאריו | מלחמות ארה"ב | הקיסר |  הנסיך הפרסי 2 | מבצע קוברה | עינו של החוזה | כח המחץ | המחסל 2029 | בלסטר מסטר 2 | טייני טון | צדק הרובוטים | הקרב הסופי 2 | הנוסע השמיני 3 | טום וג'רי | סטריידר 2 | תיבת נח | הגלדיאטורים | 
+						<BR><BR>
+						History of Mario | Usa Wars | Caesar | Prince of Persia 2 | Cobra Mission | S.C.O.U.T | Eye of the Beholder 3 | Strike Commander | Terminator 2029 | Blaster Master 2 | Tiny Toon | Cyborg Justice | Super Turrican | Final Fight 2 | Alien 3 | Tom & Jerry | Strider 2 | Noah's Ark | Global Gladiators | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 9</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/0B7AcfXJGUxB7eFY3NXRZNXVUS2VCV1FOLTVlRG1sZw/view" target="_blank">
+						<img src="images/10.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						מאיצי מסך | בונוס | יומו של הטנטקל | פרה היסטוריה 2 | אולטראבוט | הבגידה בקרונדור | זרע האופל | פרדי פארקאס | ויקטור וקטור | מורטל קומבט | הקרב הגורלי | צעצועים | הטייס | היאבקות |
+						<BR><BR>
+						EZ TV | Maniac Mansion II: Day of the Tentacle | Prehistorik 2 | Ultrabots | Betrayal at Krondor | Darkseed | Freddy Pharkas | Victor Vector | Body Blows | Mortal Kombat (SNES) | Toys (SNES) | Super Air Diver | Mighty Final Fight | Jimmy Connors | Star Trek | sega saturn | Sega CD | Jungle Strike | WWF | Fatal Fury (MD) | Superman | Outrun 2019
+						</div>
+						<figcaption class="figure-caption text-center">גליון 10</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1N6fosgX0MLMVCA34YSXHykU-32bmbHKb/view" target="_blank">
+						<img src="images/11.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						ניוטון | מאריו פונץ' | פארק היורה (הסרט) | אתגר חמשת העולמות | כלב משוגע | דום | סופר פרוג | אל פיש | יושיס קוקי | סימולטור נמלים | מירוץ הרוק'נ'רול | מגה מן 6 | סופר סאנג'י | מורטל קומבט | מגה סידי בישראל | צעצועים (סגה) | אקס-מן | 
+						<BR><BR>
+						Jurassic Park (film) | Lands of Lore | Challenge of the Five Realms | Mad Dog McCree | Doom | Superfrog | Jump Jet | El-Fish | Yoshi's Cookie | SimAnt | Rock n' Roll Racing | Operation Logic Bomb | Mega Man 6 | ChessMaster | Splitz | Super Shanghi | Mortal Kombat (MD) | MEGA CD | Pirates! Gold | B.O.B | Toys (MD) | X-Men | 
+						
+						</div>
+						<figcaption class="figure-caption text-center">גליון 11</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1fZmeQFyY5Ua7a1ksfvBTOSg_g9P5UrcJ/view" target="_blank">
+						<img src="images/12.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						נינטנדו משנה פרצוף | מאחורי הברקוד | אחרון גיבורי הפעולה | סינדיקייט | המבצר המעוף | ליברפול | שוד הכספת הגדול | סטריט פייטר 2 טורבו | הפעלולן | סופר מאריו אול סטארס | הכבאי | משפחת קדמוני | אלאדין | אביר הרקטה | רובוקופ נגד טרמינטור (סגה) | פארק היורה (סגה) 
+						<BR><BR>
+						Last Action Hero | Syndicate | Flying Fortress | Liverpool | Nippon Safe Inc. | Eternam | Protostar | Sim Life | Son of the Empire | Return to Zork | Street Fighter II Turbo | Ultimate Stuntman | Super Mario All Stars | Fire Fighter | Cool Spot | Dr. Franken II | Alien 3 (NES) | The Flintstones | Aladdin (MD) | Rocket Knight | Robocop vs Terminator (MD) | Jurassic Park (MD) | F-15 II | Streets of Rage 2 (GG) | Chuck Rock 2 |  
+						</div>
+						<figcaption class="figure-caption text-center">גליון 12</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1wDYrz-jXIcSrGjmxBFCMb4UT7VrJcV2i/view" target="_blank"> 
+						<img src="images/13.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						סגה-לנד בלאס-וגאס | באבסי הולך להוליווד | ביצי זהב | ה-3DO בישראל | במהירות האור | זול | עולמו של ויין | איפה כרמן ? | הפנתר הורוד | ספיידרמן 3 (גיימבוי) | מסע בין כוכבים (גיימבוי) | הטירה הנאצית (סופר נינטנדו) | סוניק על הכוונת | ספר הג'ונגל | 
+						<BR><BR>
+						Zool (PC) | Rags to Riches | IndyCar Racing | Return To Zork | Wayne's World | Ringworld | Daughter of Serpent | Space Hulk | Where is Carmen | Pink Panther | BioMetal | Spider-Man 3 (GB) | Star Trek (GB) | Wolfenstein 3D (SNES) | King of the Ring | Mig 29 | We're Back | 3 Count Bout | Thunderhawk | The Jungle Book | Lethal Enforces | F-15 II | Night Trap | Surf Ninjas | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 13</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/11-NwFNY7_00P__bW9kXTLxt-nG_Ev_Ij/view" target="_blank">
+						<img src="images/14.jpg" class="img-thumbnail">
+						<div class="overlay p-1">64 ביט | התשובה ליגואר | תערוכת טוקיו | יאמה הדרן למכונות הגדולות | סי. די. רום מי? מה ? מו ? | גרנד פריקס | שובו של הבאטמן | פארק יורה (פיסי) | דרקולה (פיסי) | סופר מלחמת הכוכבים | למבורגיני | פלסטלינה אלימה | ד"ר פרנקן | לוחם הרחוב 2 (סגה) | וימבלדון | מלכודת לילית | 
+						<BR><BR>
+						Grand Prix | Batman Returns | Jurassic Park (PC) | Dracula (PC) | Super Star Wars (SNES) | Lamborghini | Clay Fighting | Dr. Franken II (GB) | Street Fighter II (MD) | Wimbeldon | Gunstar Heroes | Night Trap | Ecco (GG) | Robocod (GG) | Snake, Rattle & Roll | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 14</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1jjIpeDLB6SeAn5ePeGNlKOdzLk3yWwa5/view" target="_blank">
+						<img src="images/15.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						ציוד היקפי | שנת התקליטור | חטיפי סוניק | טרוף ושמו טטריס | שמש שחורה | רוק ראפ'נ'רול | פליקס מיקס | רן וסטימפי | הסוד של מאנה | אלאדין (סופר נינטנדו) | מגה מן X | רובוקופ נגד טרמינטור (סופר נינטנדו) | מורטל קומבט 2 (כתבה) | זול (סגה) | החולית 2 | סוניק סידי |
+						<BR><BR>כולל מוסף טיפים<BR><BR>
+						Dizzy Collection | Dark Sun | Blue Force | Mega Rock Rap'N Roll | FlixMix | Inca Wiracocha 2 | Goblins 3 | Lost in Time | SimFarm | Kasparov's Gambit | Speed Racer | Art of Fighting (SNES) | Ren & Stimpy | Secret of Mana | Aladdin (SNES) | Mega Man X | RoboCop Vs. Terminator (SNES) | Taz-Mania (GB) | TMNT 3 (GB) | Tiny Toon 2 (GB) | Mortal Kombat 2 | Sensible Soccer | Zool (MD) | Dune 2 (MD) | Teenage Mutant Ninja Turtles: Tournament Fighters | Gauntlet 4 | Sonic CD | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 15</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/16o6yS0MgUK9KUgbmwCYmIFKrO_KUw08m/view" target="_blank">
+						<img src="images/16.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						32-ביט | מולטימדיה למכוניות | סופר נינטנדו נייד | הדרקון | לייזר טריפ | זול 2 | מלחמת הכוכבים מלחמת המורדים | זאבי הים | מורטל קובט (פיסי) | סאם ומקס |  ראש צעיר | מכסח הדשא | חושחש הבלש | צ'יפ אנד דייל | איש ההרס (הסרט) | פיפא | סוניק 3 | לוטוס II | נקמת הדמים | 
+						<BR><BR>
+						Zool 2 | Star Wars: Rebel Assault | Wing Commander: Privateer | Seawolf | Mortal Kombat (PC) | SAM & MAX | Rally | Sim City 2000 | Lawnmowerman | Inspector Gadget | Chip 'n Dale Rescue Rangers 2 | Cliffhanger | Last Action Hero (GB) | Jimmy Connors | Fifa Soccer | Sonic 3 | Lotus II | Blades of Vengeance | Eternal Champions | Desert Speedtrap | Daffy Duck | Ren & Stimpy (GG) | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 16</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1GSX05xbRVg1WIx637JRBhzQ7XsP8p83P/view" target="_blank">
+						<img src="images/17.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						המירוץ למשחקים חדשים | הסאטורן רק 32-ביט | כרטיס קולנוע לאמיגה | ה-8 ביט בגסיסה | CD-I נייד | אפיקומן |  צעד אחד יותר מדי | לבד באפילה 2 | האביר גבריאל חטאים של האבות | לארי 6 | שכירי חרב | נער הכדורגל | אקירה | המחלצים | דרקולה | אדמה חרוכה | 
+						<BR><BR>
+						SID and AL's | One Step Beyond | Alone in the Dark 2 | Gabriel Knight: Sins of the Fathers | Larry 6 | Litil Divil | Hired Guns | Super VGA Harrier | Quarter Pole | Dune | Space Ace | GP-1 | Soccer KID | Choplifter III | Mario Time Machine | Tiny Toons 2 (GB) | Monster Max | NBA JAM | Dracula | Ground Zero Texas | WWF Rage in the Cage | Mean Bean Machine (GG) | Battletoads (GG) | X-MEN (GG) |
+						</div>
+						<figcaption class="figure-caption text-center">גליון 17</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1pdVAeR1gnBvDvuaa-93WNlTxcLcEk9Gv/view" target="_blank">
+						<img src="images/18.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						מגה נייד CDX | האבא של המשחקים | לא רק טטריס | תערכות CES 1994 | מכשיר JVC X-EYE | דרקולה הבלתי מרוסן | לוחמת התהילה | שוליית הקוסם | ציד הארנבות | נסחעת מבחן | מעבר לתהום | גיים-גיר ספיישל | פרוייקט סודי מארס | המסע המופלא | מלכודת כפולה | 
+						<BR><BR>כולל מוסף טיפים<BR><BR>
+						Dracula Unleashed | Flight Simulator Toolkit | Entity | Epic Pinball | TFX | Comanche: Maximum Overkill | Police Quest 4 | Body Blows | Metal & Lace | Brix | Addams Family Values | Clay Fighter 2 | R-Type III | Young Merlin | Rabbit Rampage | Sky Blazer | Wild Wild Quest | Joe & Mac 2 | Super Alfred Chicken | Skitchin | Streets of Rage 3 | Castlevania (MD) | Microcosm | Double Switch | WIZ'N'LIZ | JAMMIT | Sensible Soccer | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 18</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/14DfH0OesGYWxGQKNAOWvCI69mbk2Kz2H/view" target="_blank">
+						<img src="images/19.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						הכרזות חדשות וישנות | הדור הרביעי | זו כבר לא מציאות מדומה | ההתיישבות | UFO האויב בלתי מזוהה ! | המסתנן | דמעות של דרקון | תחת ירח קטלני | מסע בין כוכבים הדור החדש | שודדים על מים אפלים | הטירה של ואריו | ספר הג'ונגל | 
+						<BR><BR>כולל מוסף טיפים<BR><BR>
+						Myst | Genesia | UFP | The Terminator: Rampage | Archon Ultra | Dragonsphere | Unreal | Micro Machines | Winter Olympics | The Incredible Hulk | Rocko's Modern Life: Spunky's Dangerous Day | Time Trax | Star Trek | Dark Water | Wario Land: Super Mario Land 3 | The Jungle Book | Lethal Enforces | Super Splitaire | Super Pinball | Dragon's Lair | Art of Fighting 2 | Columns 3 | Soldiers of Fortune | Bubba'n'Stix | Tomcat Alley | Lunar | Aladdin (GG) | NBA Jam (GG) | Beauty and the Beast | Beavis and Butt-Head | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 19</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1p6cBPALntg2Jd_aEMLH2QBzUDkUi14yq/view" target="_blank">
+						<img src="images/20.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						האמיגה גוסס ! | גיים-בוי על המסך הגדול | מחסן המשחקים | דוס חדש | אליפות העיר | הטלוויזיה האינטראקטיבית | פגאן | מטוסי הים | משחק מלחמה | נוודים בחלל | סוף העולם | מכסח הדשא | אוסקר | מגהמן כדורגל | מלחמת הרובוטים | בעיטת פתיחה | פידו דידו | מתקפת המורדים | 
+						<BR><BR>כולל מוסף טיפים<BR><BR>
+						Raptor: Call of the Shadows | Ultima VIII: Pagan | The Horde | Fleet Defender | Battle Isle 2 | Nomad | Out Post | The Lownmower Man | Barbie | Fantastic Dizzy | Mega Man Soccer | The Ninja Warriors | Metal Masters | Kick Off | Turn and Burn | Raiden | Spiderman Venom | Real GhostBusters | MS. Pac-Man | Batman (GB) | Prize Fighter | Sub-Terrania | Fido Dido | Heimdall | Heimdall 2 | Rebel Assault | Greendog (GG) | Robocop vs. The Terminator (GG) | T2 Judgment Day (GG) | Jurrasic Park (Sega CD) | Bubsy II | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 20</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1InY34nAYmA9JHRt9I4sr2dFF0saOKJ96/view" target="_blank">
+						<img src="images/21.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						סופר סופר-נינטנדו | לוקאס נגד אלימות | מוכרים אשליות | ניוטון-בוי | המונדיאל | המאמן | זה לא רק ספורט | המקופחים | 
+						<BR><BR>כולל מוסף טיפים<BR><BR>
+						Theme Park | The Elder Scrolls: Arena | Pacific Strike | Who Shot Johnny Rock? | Mega Race | Star Wars: TIE Fighter | Corridor 7 | Lands of Lore | JIM | Tempest 2000 | Dino Dudes | Spectre | The Jetsons: Invasion of the Planet Pirates | Sylvester and Tweety in Cagey Capers | Mortal Kombat (SCD) | Twisted | Fifa Soccer | European Champion | Soccer Shootout | Virtual Soccer | Rayn Gigs Champions | J. League | World Cup USA 94 | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 21</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1OxVVj62yD16pSgFGrzIfWyreLkpwdHkJ/view" target="_blank">
+						<img src="images/22.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						תחרות סגה ארצית | מגה גיר | סופר בוי | 3DO נייד | סאטורן | המטורף | מותר להעתיק | חלונות שיקאגו | פני פוקר | שם המשחק: הגנה | חגיגות הגביע העולמי |  המירוץ של מאריו אנדרטי | מבצע בעיר הגדולה |
+						<BR><BR>
+						Ravenloft | Disciples of Steel | Aegis | Detroit | James Ponds | Castles II | Red Hell | Frontier: Elite II | Star Trek (MD) | Lethal Enforces 2 | Vay | Outrunners | Time Trax | Clay Fighter | Kasumi Ninja | World Heroes 2 | Ultraman | Streets of Rage 3 | Elfmania | Power Rangers | Double Dragon V | 
+						Super Street Fighter II Turbo (SNES) | The Dragon | Fighter's History | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 22</figcaption>
+					</a>
+				</figure>
+            </div>
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/15tS47ZOoKWol9vP20KP_a62HcNP2yKVe/view?usp=sharing" target="_blank">
+						<img src="images/23.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						תקליטור לניאו-גיאו | המגזין ששר את החדשות | ירידי PCבום | הרחבה לסגה | תערכות CES 94 | זהירות SHAREWARE לפניך | גרפיקה זה כל העניין | מציאות מדומה | ספריית האפקטים | משחקים מצויירים | מלך האריות | הנמלולים 3 | 
+						<BR><BR>
+						Cyberware | Nascar Racing | system Shock | Desert Strike | Prince Interactive | Reunion | Hexx | Escape from Monster Manor | Donkey Kong '94 (GB) | Mortal Kombat II (SNES) | Brutal | Breath of Fire | Aladdin (GB) | Tazmania 2 | The Smurfs (SNES)(GB) | Micky Mania (MD) | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 23</figcaption>
+					</a>
+				</figure>
+            </div>
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1Q6ILeasp9D9Ty9e2v4ukbWftNUd5SSjM/view" target="_blank">
+						<img src="images/24.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						ספריית סגה | מודם אלחוטי | WOODSTOCK | עכבר ספוטיבי | MACTV | כרטיס אמיגה לפי.סי. | נינטנדו שוברת את הכלים | יש עם מי לדבר | אתה קונה ? סימן שאתה מרוצה | וגאס המדומה | הן שונאות אותו ! | פיפן בדרך לסגה | פיפא ל-CD | המסכה | מקולי בארץ הפלאות | וזו המציאות | 
+						<BR><BR>
+						Panzer General | Doom 2 | Simon the Sorcerer | Cannon Fodder | Wing Commander 3 | Zool 2 | Revolution X | Wolfenstein 3D | Shock Wave | Mega Man 3 | Mega Man 5 | Street Racer | Shaq Fu | Combat Cars | Batllecorps | Heart of the Alien | Maximum Carnage | Ball | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 24</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1XHJKG-fkInh56-60BB6Szr7i0_DYkd_b/view" target="_blank">
+						<img src="images/25.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						אולטרא גרפיקה | יומולדת לסיירה | סגה פי.סי. | 3DO על באמת | SHAREWARE | קינג קווסט 7 | הבריחה מעיר ההסגר | לוחמי האופל | לוחמי החלל | האנימציה הממוחשבת | נער הג'לי | ראש פצצה | שטיח הקסמים | 
+						<BR><BR>
+						King Quest VII | Colonization | Critical Path | Quarantine | Mad Dog 2 | Battle Bugs | Falcon Gold | Wing Commander Armada | Aggressors of Dark Kombat | Aero Fighters 2 | Total Eclipse | Jurassic Park (3DO) | Final Fight Guy | Probotector 2 | Jelly Boy | Blackthorne | BUBSY II (MD, SNES) | Dungeon Master II: The Legend of Skullkeep | Dynamite Headdy (GG) | Triple Trouble (GG) | Sonic & Knuckles | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 25</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1jEm3D9e8qDE5X68WyWIsi7BUHqpUNoX0/view" target="_blank">
+						<img src="images/26.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						סופר סופר-נינטנדו | EDGE 16 הסוף | משחקי SHAREWARE | תערוכת AMOA | מרד הרובוטים | נהיגת שטח | בחזרה לסוף העולם | מכוניות מתנגשות | תולעת האדמה ג'ים | אקו המסע בזמן | אוקטבה | 
+						<BR><BR>
+						Rise of the Robots | Power Driving | Alein Legacy | Stonekeep | Inferno | Novastorm | Superkarts | Leonardo the inventor | Doom | VID Grid | Road Rash (3DO) | Earthworm Jim | Zero Tolerance | Jurassic Park: Rampage Edition | Beavis & But-Head | Yogi Bear | Ecco: The Tides of Time | Beethoven | Donkey Kong Country | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 26</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1mt1deO9eCKeqkluHm4iXgpzZaO8TmHwJ/view" target="_blank">
+						<img src="images/27.jpg" class="img-thumbnail">
+						<div class="overlay p-1">סגה קנתה את אטארי | נינטנדו נגד כולם | תקליטור להעתקה | המלחמה נמשכת | שלום 1995 | מייקל ג'ורדן חוזר | 
+						<BR><BR>
+						כולל מוסף טיפים
+						<BR><BR>
+						Little Big Adventure | Dark Forces | US Navy Fighters | Kyrandia 3 | Cyclemania | Discworld | Transport Tycoon | All New World of Lemmings | Alien vs Predator | Slayer | Fifa (3DO) | Animaniac | Mickey Mania | WWF Raw | The Lion King | Boogerman | Super Punch-Out | Pitfall | Lethal Enforcer 2 | Super Return of The Jedi | Samurai Showdown | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 27</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1hHCYto2gTyLdHww8sqRHckX9CbgzuKNk/view" target="_blank">
+						<img src="images/28.jpg" class="img-thumbnail">
+						<div class="overlay p-1"> 
+						עכבר מדומה | מציאות מדומה בערוץ של סגה | 3DO בצרות | רב תקליטור | תואמי DOOM | חשיפה | השואו הגדול של נינטנדו | 
+						<BR><BR>
+						כולל מוסף טיפים
+						<BR><BR>
+						Aces of The Deep | Master of the Magic | Mortal Kombat 2 (PC) | Hell | Dark Sun 2 | Ecstaeica | Full Throttle | The Lion King (PC) | Aladdin (PC) | Zool 2 (Jag) | Cannon Fodder 2 | Star Control 2 | Street Fighter 2 Turbo (3DO) | Virtua Fighter | Tarzan (GB) | The Blue Brothers (GB) | BUBSY 2 (GB) | BC Racer | Megaman X2 (SNES) | Wolverine | Pacman 2 (MD) | NBA JAM (SCD) | Aero Acrobat 2 (MD) | SYNDICATE | Ridge Racer | Virtua Racing
+						</div>
+						<figcaption class="figure-caption text-center">גליון 28</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1gWOur6v920U58iWLzWcH0w0pUmk5hs5X/view" target="_blank">
+						<img src="images/29.jpg" class="img-thumbnail">
+						<div class="overlay p-1">הטלוויזיה האינטראקטיבית מתקרבת | המסוף של קפקום | כפפת משחק | קוסם המשחקים | מורידים משחקים | משינה | מציאות מדומה בהישג יד | סוף המשחק חלק א' | איפה דורון שפר ? | NBA JAM הטורניר הגדול | עד לא מדיה | 
+						<BR><BR>
+						כולל מוסף טיפים
+						<BR><BR>
+						Club Dead | CyberJudas | Heroes of Might and Magic | TacOps | Midnight Stranger | Flight Unlimited | Space Pirates | Voyeur | Monthy Python | Creature Shock | Dragon (Jag) | Club Drive (Jag) | Mega Race (3DO) | Supreme Warrior (3DO) | Pataank (3DO) | Mortal Kombat III | Biker Mica (SNES) | Cosmic Carnage | Snatcher (SCD) | Home Improvemnet (SNES) | Corpse Killer (SCD) | Iron Helix (SCD) | 
+						</div>
+						<figcaption class="figure-caption text-center">גליון 29</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+			<div class="image-container  p-2">
+                <figure class="figure image">
+					<a href="https://drive.google.com/file/d/1zZvivRN0BhQgQXLld7XEdoRrFD_XwZLf/view" target="_blank">
+						<img src="images/30.jpg" class="img-thumbnail">
+						<div class="overlay p-1">
+						יום הולדת ל-POWER MACINTOSH | פיפן מבית מק | שליטה מדומה | 3DO היקפי המאבק על השליטה | חלונות 3.11 | הקניון האלקטרוני העולמי | כנף הדרקון | שוק המצלמות פורח | סוף המשחק חלק ב' | המגרש של סאטורן | 
+						<BR><BR>
+						כולל מוסף טיפים
+						<BR><BR>
+						All New World | Alone in The Dark 3 | KA-50 Hokum | Death Fate | The 11th Hour | Ghosts | Cyberia | X-COM: UFO | Pizza Tycoon | Iron Soldier (Jag) | Theme Park (Jag) | Demolition Man (3DO) | The Need For Speed (3DO) | Zed Balde (NG) | Mega Man VII (SNES) | After Burner | The Death and Return of Superman (MD) | Ogre Battle (SNES) | The Masked Rider (SCD) | Bouncers (SCD) | Knuckles' Chaotix (MD 32x) | Starfox 2 | 
+
+						</div>
+						<figcaption class="figure-caption text-center">גליון 30</figcaption>
+					</a>
+				</figure>
+            </div>
+			
+            
+        </div>
+		<!-- Footer -->
+	  <footer class="text-center mt-auto py-3 bg-light">
+		<p class="mb-0">האתר נוצר על ידי Yallabalagan בשיתוף פעולה עם רמי שיר</p>
+	  </footer>
+    </div>
+    
+	<script>
+        function filterImages() {
+            var input, filter, images, figcaptions, i, image, figcaption;
+            input = document.querySelector(".form-control");
+            filter = input.value.toUpperCase();
+            images = document.querySelectorAll(".image");
+            for (i = 0; i < images.length; i++) {
+                image = images[i].querySelector("img");
+                figcaption = images[i].querySelector(".overlay");
+                if (image.alt.toUpperCase().indexOf(filter) > -1 || figcaption.innerText.toUpperCase().indexOf(filter) > -1) {
+                    images[i].style.display = "";
+                } else {
+                    images[i].style.display = "none";
+                }
+            }
+        }
+		
+		// Get data from HTML
+		var data = [];
+		var newObject = [];
+		document.querySelectorAll('.overlay').forEach(function(node) {
+		  var str = node.innerText.replace(/\n/g, '|');
+		  var options = str.split('|');
+		  options = options.filter(value => value !== '');
+		  options.forEach(function(option) {
+			data.push(option.trim());
+		  });
+		  
+		  newObject = data.reduce((obj, value, index) => {
+			  obj[value] = (index + 1);
+			  return obj;
+			}, {});
+			
+		});
+		
+        
+        $('#myAutocomplete').autocomplete({
+            source: newObject,
+            onSelectItem: filterImages,
+            highlightClass: 'text-danger',
+			treshold : 2
+        });
+		
+		document.getElementById('myAutocomplete').addEventListener('input', function(event) {
+		  filterImages();
+		});
+		
+		// Assuming '#myInput' is the id of your input field
+		var input = document.querySelector('#myAutocomplete');
+		var clearButton = document.querySelector('#clearButton');
+
+		// Add an event listener to the clear button
+		clearButton.addEventListener('click', function() {
+			// Clear the input field
+			input.value = '';
+			filterImages();
+		});
+		
+    </script>
+</body>
+</html>
